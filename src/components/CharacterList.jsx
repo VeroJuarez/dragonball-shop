@@ -9,15 +9,15 @@ const CharacterList = ({ addToCart }) => {
     useEffect(() => {
         const fetchCharacters = async () => {
             try {
-                const response = await fetch("https://www.dragonball-api.com/api/character")
+                const response = await fetch('https://dragonball-api.com/api/characters?limit=12')
                 if (!response.ok) {
                     throw new Error("Error al cargar los personajes")
                 }
                 const data = await response.json()
-                setCharacters(data.items || data) // según cómo venga la estructura
+                setCharacters(data.items)
             } catch (err) {
                 console.error(err)
-                setError(true)
+                setError('No se pudieron cargar los personajes.')
             } finally {
                 setLoading(false)
             }
@@ -25,31 +25,29 @@ const CharacterList = ({ addToCart }) => {
         fetchCharacters()
     }, [])
     if (loading) return <p>Cargando personajes...</p>
-    if (error) return <p>Error al cargar personajes. Intenta más tarde.</p>
+    if (error) return <div className="text-red-500 p-4">{error}</div>;
 
     return (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 p-4">
             {characters.map((character) => (
                 <div
                     key={character.id}
                     className="bg-white rounded-2xl shadow-md overflow-hidden p-2 text-center"
                 >
-                    <img
-                        src={character.image}
-                        alt={character.name}
-                        className="w-full h-48 object-cover rounded-lg"
-                    />
-                    <h3 className="text-lg font-semibold mt-2">{character.name}</h3>
-        
-                    <Link
-                        to={`/characters/${character.id}`}
-                        className="block text-blue-600 underline mt-1"
-                    >
-                        Ver Detalle
-                    </Link>
-
+                    <figure className="object-cover w-48 h-48 overflow-hidden">
+                        <img
+                            src={character.image}
+                            alt={character.name}
+                            className="max-w-[200px]"
+                        />
+                    </figure>
+                    <p className="text-gray-600">Raza: {character.race}</p>
+                    <p className="text-gray-600">Ki: {character.ki} / {character.maxKi}</p>
                     <button
-                        onClick={() => addToCart(character)}
+                        onClick={() => {
+                            addToCart(character)
+                            alert(`${character.name} fue agregado al carrito.`)
+                        }}
                         className="mt-2 bg-purple-600 text-white px-3 py-1 rounded-full hover:bg-purple-700"
                     >
                         Agregar al carrito

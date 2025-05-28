@@ -1,17 +1,20 @@
+import React from "react"
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useState } from 'react'
-import Navbar from './components/Navbar.jsx'
-import CharacterList from "./components/CharacterList"
-import Cart from './pages/Cart.jsx'
-import CharacterDetail from "./components/CharacterDetail"
-import About from './components/About.jsx'
-import Contact from './components/Contact.jsx'
-import Login from './components/Login.jsx'
-import Header from './components/Header.jsx'
+import Navbar from "./components/Navbar.jsx"
+import Header from "./components/Header"
+
+// Páginas
+import CharacterList from "./components/CharacterList.jsx"
+import Cart from "./components/Cart.jsx"
+import CharacterDetail from "./components/CharacterDetail.jsx"
+import About from "./components/About.jsx"
+import Contact from "./pages/Contact.jsx"
+import Login from "./components/Login.jsx"
+
 
 
 const App = () => {
-    console.log('hola mundo!')
     const [cartItems, setCartItems] = useState([])
     const [isAuthenticated, setIsAuthenticated] = useState(false)
 
