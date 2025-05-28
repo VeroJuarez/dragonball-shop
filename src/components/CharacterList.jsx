@@ -34,7 +34,7 @@ const CharacterList = ({ addToCart }) => {
                     key={character.id}
                     className="bg-white rounded-2xl shadow-md overflow-hidden p-2 text-center"
                 >
-                    <figure className="object-cover w-48 h-48 overflow-hidden">
+                    <figure className="object-cover w-48 h-48 mx-auto overflow-hidden">
                         <img
                             src={character.image}
                             alt={character.name}
