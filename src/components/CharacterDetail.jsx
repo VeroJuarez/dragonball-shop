@@ -1,6 +1,22 @@
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 
+// Agregá más personajes, solo use 12 personajes
+const PRICE_MAP = {
+    "Goku": 30000,
+    "Vegeta": 28000,
+    "Bulma": 15000,
+    "Piccolo": 20000,
+    "Freezer": 50000,
+    "Zarbon": 12000,
+    "Dodoria": 18000,
+    "Ginyu": 22000,
+    "Cell": 50000,
+    "Gohan": 25000,
+    "Tenshinhan": 27000,
+    "Krillin": 18000,
+};
+
 const CharacterDetail = () => {
     const { id } = useParams()
     const navigate = useNavigate()
@@ -11,21 +27,31 @@ const CharacterDetail = () => {
     useEffect(() => {
         const fetchCharacter = async () => {
             try {
-                const res = await fetch(`https://www.dragonball-api.com/api/character/${id}`)
+                const res = await fetch(`https://dragonball-api.com/api/characters/${id}`);
                 if (!res.ok) {
-                    throw new Error("Error al obtener el personaje")
+                    throw new Error("Error al obtener el personaje");
                 }
-                const data = await res.json()
-                setCharacter(data)
+    
+                const data = await res.json();
+    
+                // Agregarle un precio manual si está en el PRICE_MAP
+                const enrichedCharacter = {
+                    ...data,
+                    price: PRICE_MAP[data.name] || 20000,
+                };
+    
+                setCharacter(enrichedCharacter);
+    
             } catch (err) {
-                setError(err.message)
+                setError(err.message);
             } finally {
-                setLoading(false)
+                setLoading(false);
             }
         };
-
+    
         fetchCharacter();
     }, [id]);
+    
 
     if (loading) return <p>Cargando personaje...</p>;
     if (error) return  <p className="text-red-600 text-center mt-4">Error: {error}</p>
@@ -42,12 +68,28 @@ const CharacterDetail = () => {
             <ul className="space-y-2 text-lg">
                 <li><strong>Raza:</strong> {character.race}</li>
                 <li><strong>Género:</strong> {character.gender}</li>
-                <li><strong>Origen:</strong> {character.origin}</li>
-                <li><strong>Ki:</strong> {character.ki}</li>
-                <li><strong>Descripción:</strong> {character.description}</li>
+                <li><strong>Origen:</strong> {character.originPlanet?.name || "Desconocido"}</li>
+                <li><strong>Ki base:</strong> {character.ki}</li>
+                <li><strong>Ki máximo:</strong> {character.maxKi}</li>
+                <li><strong>Precio:$</strong> {character.price}</li>
+                <li className="text-justify"><strong>Descripción:</strong> {character.description}</li>
             </ul>
+            {character.transformations?.length > 0 && (
+                <div className="mt-6">
+                    <h3 className="text-xl font-semibold mb-2">Transformaciones:</h3>
+                    <div className="grid grid-cols-2 gap-4">
+                        {character.transformations.map((trans) => (
+                            <div key={trans.id} className="bg-white shadow p-2 rounded-lg text-center">
+                                <img src={trans.image} alt={trans.name} className="w-24 h-24 object-contain mx-auto" />
+                                <p className="font-medium">{trans.name}</p>
+                                <p className="text-sm">Ki: {trans.ki}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                )}
         </div>
-      );
+    )
 };
     
 export default CharacterDetail;

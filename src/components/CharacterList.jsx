@@ -64,7 +64,7 @@ const CharacterList = ({ addToCart }) => {
                     <h3 className="text-lg font-semibold">{character.name}</h3>
                     <p className="text-gray-600">Raza: {character.race}</p>
                     <p className="text-gray-600">Ki: {character.ki} / {character.maxKi}</p>
-                    <p className="text-gray-600">Precio: {character.price}</p>
+                    <p className="text-gray-600">Precio:${character.price}</p>
                     <Link
                         to={`/characters/${character.id}`}
                         className="mt-2 bg-gray-200 text-gray-700 px-3 py-1 rounded-full hover:bg-gray-300 inline-block"
