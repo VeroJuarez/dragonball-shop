@@ -1,7 +1,7 @@
 const Header = () => {
     return (
-      <header className="bg-dark text-white p-3 text-center">
-        <h1 className="text-3xl font-bold">Dragon Ball Z Shop</h1>
+      <header>
+        <img src="./src/assets/Dragon_Ball_Z_Logo.png" className="max-w-[200px] mx-auto"></img>
       </header>
     );
 };

@@ -1,4 +1,4 @@
-// src/pages/Contact.jsx
+
 import { useState } from "react"
 
 const Contact = () => {

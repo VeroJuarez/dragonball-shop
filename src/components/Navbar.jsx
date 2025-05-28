@@ -19,16 +19,6 @@ const Navbar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/characters" className="hover:underline">
-                        Personajes
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/cart" className="hover:underline">
-                        Carrito
-                    </Link>
-                </li>
-                <li>
                     <Link to="/about" className="hover:underline">
                         Nosotros
                     </Link>
@@ -36,6 +26,11 @@ const Navbar = () => {
                 <li>
                     <Link to="/contact" className="hover:underline">
                         Contacto
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/cart" className="hover:underline">
+                        Carrito
                     </Link>
                 </li>
                 <li>
