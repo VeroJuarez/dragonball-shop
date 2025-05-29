@@ -30,7 +30,6 @@ const App = () => {
                     return [...prevCart, { ...character, quantity: 1 }];
             }
         })
-        alert(`${character.name} fue agregado al carrito.`);
     }
     // Vaciar carrito
     const clearCart = () => {
@@ -63,7 +62,7 @@ const App = () => {
             <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
             <Routes>
                 <Route path="/" element={<CharacterList addToCart={addToCart} />} />
-                <Route path="/characters/:id" element={<CharacterDetail />} />
+                <Route path="/characters/:id" element={<CharacterDetail addToCart={addToCart}/>} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />

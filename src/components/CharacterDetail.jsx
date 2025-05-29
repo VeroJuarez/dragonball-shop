@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams } from "react-router-dom"
+import Swal from "sweetalert2";
 
 // Agregá más personajes, solo use 12 personajes
 const PRICE_MAP = {
@@ -17,9 +18,8 @@ const PRICE_MAP = {
     "Krillin": 18000,
 };
 
-const CharacterDetail = () => {
+const CharacterDetail = ({ addToCart }) => {
     const { id } = useParams()
-    const navigate = useNavigate()
     const [character, setCharacter] = useState(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
@@ -57,6 +57,16 @@ const CharacterDetail = () => {
     if (error) return  <p className="text-red-600 text-center mt-4">Error: {error}</p>
     if (!character) return <p className="text-center mt-4">Personaje no encontrado.</p>
 
+    const handleAddToCart = () => {
+        addToCart(character);
+        Swal.fire({
+            icon: "success",
+            title: "Agregado al carrito",
+            text: `${character.name} fue agregado al carrito.`,
+            timer: 1500,
+            showConfirmButton: false,
+        });
+    };
     return (
         <div className="max-w-2xl mx-auto p-4">
             <h2 className="text-3xl font-bold mb-4">{character.name}</h2>
@@ -74,6 +84,11 @@ const CharacterDetail = () => {
                 <li><strong>Precio:$</strong> {character.price}</li>
                 <li className="text-justify"><strong>Descripción:</strong> {character.description}</li>
             </ul>
+            <button
+                onClick={handleAddToCart}
+                className="mt-2 bg-purple-600 text-white px-3 py-1 rounded-full hover:bg-purple-700">
+                Agregar al carrito
+            </button>
             {character.transformations?.length > 0 && (
                 <div className="mt-6">
                     <h3 className="text-xl font-semibold mb-2">Transformaciones:</h3>

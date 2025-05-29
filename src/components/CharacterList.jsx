@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CharacterList = ({ addToCart }) => {
     const [characters, setCharacters] = useState([])
@@ -47,6 +48,16 @@ const CharacterList = ({ addToCart }) => {
     if (loading) return <p>Cargando personajes...</p>
     if (error) return <div className="text-red-500 p-4">{error}</div>;
 
+    const handleAddToCart = (character) => {
+        addToCart(character);
+        Swal.fire({
+            icon: "success",
+            title: "Agregado al carrito",
+            text: `${character.name} fue agregado al carrito.`,
+            timer: 1500,
+            showConfirmButton: false,
+        });
+    };
     return (
         <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 p-4">
             {characters.map((character) => (
@@ -72,8 +83,8 @@ const CharacterList = ({ addToCart }) => {
                         Ver más
                     </Link>
                     <button
-                        onClick={() => {
-                            addToCart(character)
+                       onClick={() => {
+                        handleAddToCart(character)
                         }}
                         className="mt-2 bg-purple-600 text-white px-3 py-1 rounded-full hover:bg-purple-700"
                     >
