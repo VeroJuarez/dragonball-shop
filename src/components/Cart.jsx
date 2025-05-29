@@ -1,4 +1,23 @@
-const Cart = ({ cartItems = [], clearCart,  increaseQuantity, decreaseQuantity }) => {
+import Swal from "sweetalert2";
+
+const Cart = ({ cartItems = [], clearCart, increaseQuantity, decreaseQuantity }) => {
+    const handleClearCart = () => {
+        Swal.fire({
+            title: "¿Estás seguro?",
+            text: "Se vaciará todo el carrito",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Sí, vaciar",
+            cancelButtonText: "Cancelar",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                clearCart(); // Esta función sí vacía el carrito
+                Swal.fire("¡Listo!", "Tu carrito fue vaciado.", "success");
+            }
+        });
+    };
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white rounded-2xl shadow-md mt-4">
             <h2 className="text-2xl font-bold mb-4">Mi Carrito</h2>
@@ -38,10 +57,16 @@ const Cart = ({ cartItems = [], clearCart,  increaseQuantity, decreaseQuantity }
                         Total: ${cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)}
                     </p>
                 </div>
-                <button onClick={clearCart}
-                className="mt-6 bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-600">
-                    Vaciar Carrito
-                </button>
+                <div className="flex gap-4">
+                    <button onClick={handleClearCart}
+                    className="mt-6 bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-600">
+                        Vaciar Carrito
+                    </button>
+                    <button
+                        className="mt-6 bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-600">
+                        Finalizar Compra
+                    </button>
+                </div> 
             </>
         )}
         </div>

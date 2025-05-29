@@ -45,9 +45,9 @@ const Navbar = () => {
                 </li>
                 <li>
                     <NavLink 
-                        to="/admin" 
-                        className={({ isActive }) => isActive ? "underline font-bold text-yellow-300" : "hover:underline"}>
-                        Admin
+                      to="/admin" 
+                      className={({ isActive }) => isActive ? "underline font-bold text-yellow-300" : "hover:underline"}>
+                      Admin
                     </NavLink>
                 </li>
             </ul>
