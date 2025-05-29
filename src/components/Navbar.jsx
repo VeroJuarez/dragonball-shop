@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useState } from "react";
 
 const Navbar = () => { 
@@ -10,33 +10,45 @@ const Navbar = () => {
     <nav className="bg-purple-700 text-white p-4 shadow-md">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
             <h1 className="text-2xl font-bold">
-                <Link to="/">Dragon Ball Shop</Link>
+                <NavLink to="/" className="hover:underline">
+                    Dragon Ball Shop
+                </NavLink>
             </h1>
             <ul className="flex gap-4">
                 <li>
-                    <Link to="/" className="hover:underline">
-                        Inicio
-                    </Link>
+                    <NavLink 
+                        to="/" 
+                        className={({ isActive }) => isActive ? "underline font-bold text-yellow-300" : "hover:underline"}>
+                            Inicio
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/about" className="hover:underline">
-                        Nosotros
-                    </Link>
+                    <NavLink 
+                        to="/about" 
+                        className={({ isActive }) => isActive ? "underline font-bold text-yellow-300" : "hover:underline"}>
+                            Nosotros
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/contact" className="hover:underline">
-                        Contacto
-                    </Link>
+                    <NavLink 
+                        to="/contact" 
+                        className={({ isActive }) => isActive ? "underline font-bold text-yellow-300" : "hover:underline"}>
+                            Contacto
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/cart" className="hover:underline">
-                        Carrito
-                    </Link>
+                    <NavLink 
+                        to="/cart" 
+                        className={({ isActive }) => isActive ? "underline font-bold text-yellow-300" : "hover:underline"}>
+                            Carrito
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/admin" className="hover:underline">
+                    <NavLink 
+                        to="/admin" 
+                        className={({ isActive }) => isActive ? "underline font-bold text-yellow-300" : "hover:underline"}>
                         Admin
-                    </Link>
+                    </NavLink>
                 </li>
             </ul>
             <div>
