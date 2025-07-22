@@ -1,12 +1,74 @@
-# React + Vite
+# 🐉 DragonBall Shop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web de venta ficticia de personajes de Dragon Ball. Podés explorar personajes, agregarlos al carrito, simular una compra y administrar productos desde un panel de administrador.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologías utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React** + **Vite**
+- **React Router DOM**
+- **Context API**
+- **Axios**
+- **Bootstrap** + **styled-components**
+- **React Icons** + **React Toastify**
+- **SweetAlert2**
+- **MockAPI** (CRUD para productos)
+- **API externa**: [https://www.dragonball-api.com/api/](https://www.dragonball-api.com/api/)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📦 Instalación y ejecución
+
+1. **Clonar el repositorio**
+
+```bash
+git clone https://github.com/tuusuario/dragonball-shop.git
+cd dragonball-shop
+
+--- 
+
+2.  **Instalar dependencias**
+
+```bash
+npm install
+
+3. **Ejecutar la aplicación**
+
+```bash
+npm run dev
+
+🔑 Login simulado
+Usuario: admin
+
+Contraseña: 1234
+
+El login te da acceso al panel de administrador para crear, editar y eliminar productos (personajes).
+
+🛒 Funcionalidades
+📃 Listado de personajes desde la API externa
+
+🔍 Búsqueda por nombre
+
+📦 Detalle de cada personaje
+
+🛒 Agregar y quitar productos del carrito (con control de stock)
+
+🔐 Rutas protegidas con login simulado
+
+🧠 CRUD completo usando MockAPI (productos personalizados)
+
+📱 Diseño responsivo (Bootstrap + styled-components)
+
+💬 Alertas de acción (SweetAlert2 y Toastify)
+
+❌ Manejo de errores y validaciones
+
+🌐 APIs utilizadas
+🐉 Dragon Ball API: https://www.dragonball-api.com/api
+
+🔧 MockAPI: https://mockapi.io/ (para productos personalizados)
+
+✍️ Autor
+Proyecto desarrollado por Juarez Verónica como parte de una entrega final del curso de React JS.
+
+
+
