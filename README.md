@@ -19,34 +19,29 @@ Aplicación web de venta ficticia de personajes de Dragon Ball. Podés explorar 
 ## 📦 Instalación y ejecución
 
 1. **Clonar el repositorio**
-
-```bash
-git clone https://github.com/tuusuario/dragonball-shop.git
-cd dragonball-shop
-
---- 
-
-2.  **Instalar dependencias**
-
-```bash
-npm install
+   git clone https://github.com/tuusuario/dragonball-shop.git
+   cd dragonball-shop
+   
+2. **Instalar dependencias**
+   npm install
 
 3. **Ejecutar la aplicación**
+  npm run dev
 
-```bash
-npm run dev
+---
 
-🔑 Login simulado
+## 🔑 Login simulado
 Usuario: admin
 
 Contraseña: 1234
 
 El login te da acceso al panel de administrador para crear, editar y eliminar productos (personajes).
 
-🛒 Funcionalidades
-📃 Listado de personajes desde la API externa
+---
 
-🔍 Búsqueda por nombre
+## 🛒 Funcionalidades
+
+📃 Listado de personajes desde la API externa
 
 📦 Detalle de cada personaje
 
@@ -62,12 +57,16 @@ El login te da acceso al panel de administrador para crear, editar y eliminar pr
 
 ❌ Manejo de errores y validaciones
 
+---
+
 🌐 APIs utilizadas
 🐉 Dragon Ball API: https://www.dragonball-api.com/api
 
 🔧 MockAPI: https://mockapi.io/ (para productos personalizados)
 
-✍️ Autor
+---
+
+## ✍️ Autor
 Proyecto desarrollado por Juarez Verónica como parte de una entrega final del curso de React JS.
 
 
