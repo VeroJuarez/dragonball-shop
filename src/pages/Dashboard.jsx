@@ -91,6 +91,7 @@ export default function Dashboard() {
     if (result.isConfirmed) {
       try {
         await deleteProducto(id)
+        await fetchPersonajes()
         Swal.fire('¡Eliminado!', 'El producto ha sido eliminado.', 'success')
       } catch (error) {
         Swal.fire('Error', error.message, 'error')
