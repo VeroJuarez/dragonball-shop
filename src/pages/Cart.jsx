@@ -1,4 +1,4 @@
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"
 
 const Cart = ({ cartItems = [], clearCart, increaseQuantity, decreaseQuantity }) => {
     const handleClearCart = () => {
@@ -13,11 +13,23 @@ const Cart = ({ cartItems = [], clearCart, increaseQuantity, decreaseQuantity })
             cancelButtonText: "Cancelar",
         }).then((result) => {
             if (result.isConfirmed) {
-                clearCart(); // Esta función sí vacía el carrito
-                Swal.fire("¡Listo!", "Tu carrito fue vaciado.", "success");
+                clearCart() // Esta función sí vacía el carrito
+                Swal.fire("¡Listo!", "Tu carrito fue vaciado.", "success")
             }
         });
     };
+
+    const handleFinalizarCompra = () => {
+        Swal.fire({
+            title: "¡Gracias por tu compra!",
+            text: "Tu pedido ha sido procesado.",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+        }).then(() => {
+            clearCart() // Vaciar el carrito después de finalizar la compra
+        })
+    }
+
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white rounded-2xl shadow-md mt-4">
             <h2 className="text-2xl font-bold mb-4">Mi Carrito</h2>
@@ -30,13 +42,12 @@ const Cart = ({ cartItems = [], clearCart, increaseQuantity, decreaseQuantity })
                     {cartItems.map((item) => (
                         <li key={item.id} className="bg-white rounded-2xl shadow-md overflow-hidden p-2 text-center">
                             <figure className="object-cover w-48 h-48 mx-auto overflow-hidden">
-                                <img src={item.image} alt={item.name} className="max-w-[200px]" />
+                                <img src={item.imagen} alt={item.nombre} className="max-w-[200px]" />
                             </figure>
                             <div className="flex-grow">
-                                <h3 className="text-lg font-semibold">{item.name}</h3>
-                                <p className="text-sm text-gray-600">Raza: {item.race}</p>
-                                <p className="text-sm text-gray-600">Precio: ${item.price}</p>
-                                <p className="text-sm text-gray-600">Subtotal: ${item.price * item.quantity}</p>
+                                <h3 className="text-lg font-semibold">{item.nombre}</h3>
+                                <p className="text-sm text-gray-600">Precio: ${item.precio}</p>
+                                <p className="text-sm text-gray-600">Subtotal: ${item.precio * item.quantity}</p>
                                 <div className="flex items-center mt-2 gap-2">
                                     <button onClick={() => decreaseQuantity(item.id)}
                                         className="px-2 py-1 bg-red-500 text-white rounded-full mx-auto">
@@ -44,7 +55,13 @@ const Cart = ({ cartItems = [], clearCart, increaseQuantity, decreaseQuantity })
                                     </button>
                                     <span className="px-2">{item.quantity}</span>
                                     <button onClick={() => increaseQuantity(item.id)}
-                                        className="px-2 py-1 bg-green-500 text-white rounded-full mx-auto">
+                                        disabled={item.quantity >= item.stock}
+                                        className={`px-2 py-1 rounded-full mx-auto ${
+                                            item.quantity >= item.stock
+                                                ? "bg-gray-400 cursor-not-allowed text-white"
+                                                : "bg-green-500 hover:bg-green-600 text-white"
+                                        }`}
+                                    >
                                         +
                                     </button>
                                 </div>
@@ -54,7 +71,7 @@ const Cart = ({ cartItems = [], clearCart, increaseQuantity, decreaseQuantity })
                 </ul>
                 <div className="text-right mt-4">
                     <p className="text-xl font-bold">
-                        Total: ${cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)}
+                        Total: ${cartItems.reduce((acc, item) => acc + item.precio * item.quantity, 0)}
                     </p>
                 </div>
                 <div className="flex gap-4">
@@ -62,7 +79,7 @@ const Cart = ({ cartItems = [], clearCart, increaseQuantity, decreaseQuantity })
                     className="mt-6 bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-600">
                         Vaciar Carrito
                     </button>
-                    <button
+                    <button onClick={handleFinalizarCompra}
                         className="mt-6 bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-600">
                         Finalizar Compra
                     </button>
@@ -70,8 +87,8 @@ const Cart = ({ cartItems = [], clearCart, increaseQuantity, decreaseQuantity })
             </>
         )}
         </div>
-    );
-};
+    )
+}
   
-export default Cart;
+export default Cart
   

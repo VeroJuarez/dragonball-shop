@@ -1,92 +1,51 @@
 import React from "react"
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { useState } from 'react'
+import { Routes, Route, Navigate } from "react-router-dom"
 import Navbar from "./components/Navbar.jsx"
-import Header from "./components/Header"
+import Header from "./components/Header.jsx"
+import { useCarrito } from "./context/CarritoContext.jsx"
 
 // Páginas
-import CharacterList from "./components/CharacterList.jsx"
-import Cart from "./components/Cart.jsx"
-import CharacterDetail from "./components/CharacterDetail.jsx"
+import HomePage from "./pages/HomePage.jsx"
+import Cart from "./pages/Cart.jsx"
 import About from "./components/About.jsx"
 import Contact from "./components/Contact.jsx"
-import Login from "./components/Login.jsx"
+import Login from "./pages/Login.jsx"
+import Dashboard from "./pages/Dashboard.jsx"
+import ProtectedRoute from "../src/components/ProtectedRoute.jsx"
 
 const App = () => {
-    const [cartItems, setCartItems] = useState([])
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
-
-    // Añadir producto al carrito
-    const addToCart = (character) => {
-        setCartItems((prevCart) => {
-            const existingItem = prevCart.find((item) => item.id === character.id);
-            if (existingItem) {
-                return prevCart.map((item) =>
-                    item.id === character.id
-                        ? { ...item, quantity: item.quantity + 1 }
-                        : item
-                    );
-                } else {
-                    return [...prevCart, { ...character, quantity: 1 }];
-            }
-        })
-    }
-    // Vaciar carrito
-    const clearCart = () => {
-        setCartItems([]);
-    };
-
-    // Agregar más cantidad del producto en el carrito
-    const increaseQuantity = (id) => {
-        setCartItems((prevCart) =>
-            prevCart.map((item) =>
-                item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-            )
-        );
-    };
+    const { cartItems, addToCart, clearCart, increaseQuantity, decreaseQuantity } = useCarrito()
     
-    // Quitar cantidad del producto en el carrito
-    const decreaseQuantity = (id) => {
-        setCartItems((prevCart) =>
-            prevCart
-            .map((item) =>
-                item.id === id ? { ...item, quantity: item.quantity - 1 } : item
-            )
-            .filter((item) => item.quantity > 0)
-        );
-    };
-      
     return (
-        <Router>
+        <>
             <Header/>
-            <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+            <Navbar />
             <Routes>
-                <Route path="/" element={<CharacterList addToCart={addToCart} />} />
-                <Route path="/characters/:id" element={<CharacterDetail addToCart={addToCart}/>} />
+                <Route path="/" element={<HomePage/>} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-                <Route path="/cart" 
-                    element={<Cart cartItems={cartItems} 
-                    clearCart={clearCart} 
-                    increaseQuantity={increaseQuantity}
-                    decreaseQuantity={decreaseQuantity}/>}
-                />
+                <Route path="/login" element={<Login />} />
                 
                 {/* Rutas protegidas */}
-                <Route path="/admin" 
+                <Route path="/dashboard" 
                     element={
-                        isAuthenticated ? (
-                            <h2 className="text-center mt-8">Bienvenido al panel de admin</h2>
-                        ) : (
-                            <Navigate to="/" />
-                        )
+                        <ProtectedRoute>
+                            <Dashboard />
+                        </ProtectedRoute>
                     }
                 />
-                {/* Ruta por defecto */}
-                <Route path="*" element={<Navigate to="/" />} />
+                <Route path="/cart" 
+                    element={
+                        <ProtectedRoute>
+                            <Cart cartItems={cartItems} 
+                            clearCart={clearCart} 
+                            increaseQuantity={increaseQuantity}
+                            decreaseQuantity={decreaseQuantity}/>
+                        </ProtectedRoute>
+                    }
+                />
             </Routes>
-        </Router>
+        </>
     )
 }
 
