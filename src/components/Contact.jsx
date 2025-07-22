@@ -6,15 +6,15 @@ const Contact = () => {
         nombre: "",
         email: "",
         mensaje: "",
-    });
+    })
 
     const handleChange = (e) => {
         const { name, value } = e.target
         setForm((prevForm) => ({
             ...prevForm,
             [name]: value,
-        }));
-    };
+        }))
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
