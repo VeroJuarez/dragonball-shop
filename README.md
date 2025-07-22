@@ -12,7 +12,6 @@ Aplicación web de venta ficticia de personajes de Dragon Ball. Podés explorar 
 - **React Icons** + **React Toastify**
 - **SweetAlert2**
 - **MockAPI** (CRUD para productos)
-- **API externa**: [https://www.dragonball-api.com/api/](https://www.dragonball-api.com/api/)
 
 ---
 
